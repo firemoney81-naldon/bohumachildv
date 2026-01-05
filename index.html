@@ -1,23 +1,595 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "어린이보험 다이렉트 비교 및 추천 서비스",
+      "provider": {
+        "@type": "Organization",
+        "name": "어린이보험 다이렉트 비교센터",
+        "url": "https://yourdomain.com",
+        "logo": "https://yourdomain.com/logo.png"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "대한민국"
+      },
+      "description": "2026년 최신 어린이보험 다이렉트 상품을 비교하고, 우리 아이에게 가장 적합한 보장과 합리적인 가격을 찾아드립니다.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "어린이보험 다이렉트 가입 비교",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "어린이보험 30세만기 비갱신형"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "30000",
+              "priceCurrency": "KRW",
+              "description": "성인 보장 전환 가능, 저렴한 보험료로 30세까지 집중 보장"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "어린이보험 100세만기 무해지환급형"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "60000",
+              "priceCurrency": "KRW",
+              "description": "성인까지 쭉 보장, 해지 시 환급금 없는 대신 보험료 저렴"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "@id": "https://yourdomain.com/children_insurance_comparison",
+              "name": "어린이보험 갱신형/비갱신형 비교 설계"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "0",
+              "priceCurrency": "KRW",
+              "description": "맞춤형 보험료 견적 및 비교 상담 무료 제공"
+            }
+          }
+        ]
+      },
+      "url": "https://yourdomain.com"
+    }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            background-color: #f8faff; /* 아주 부드러운 배경색 */
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #007bff, #0056b3); /* 부드러운 파란색 그라데이션 */
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            position: relative;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -1px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        h2 {
+            color: #007bff;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid #007bff;
+            display: inline-block;
+            text-align: left;
+        }
+        h3 {
+            font-size: 1.6rem;
+            color: #2c3e50;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-left: 5px solid #007bff;
+            padding-left: 10px;
+        }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        section {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            margin-bottom: 3rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        th, td {
+            padding: 1.2rem;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+            font-size: 1rem;
+        }
+        th {
+            background-color: #f0f8ff; /* 연한 하늘색 배경 */
+            color: #007bff;
+            font-weight: 700;
+            text-align: center;
+        }
+        tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+        .highlight {
+            font-weight: 700;
+            color: #d9534f; /* 강조 색상 */
+            font-size: 1.1rem;
+        }
+        .cta-button {
+            display: block;
+            background-color: #28a745; /* 강조 색상 (초록색) */
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            padding: 1.5rem 2.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            margin: 2.5rem auto;
+            width: fit-content;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+        .cta-button:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+        }
+        .keyword-tags {
+            margin: 1.5rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .keyword-tags a {
+            background-color: #e3f2fd;
+            color: #007bff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .keyword-tags a:hover {
+            background-color: #bbdefb;
+        }
+        .external-links ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .external-links li {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fcfcfc;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .external-links li:hover {
+            background-color: #eef7ff;
+        }
+        .external-links a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+        }
+        .external-links a:hover {
+            text-decoration: underline;
+        }
+        .check-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            list-style: none;
+            font-size: 1.05rem;
+        }
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #28a745;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #888;
+            background-color: #e9ecef;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            margin-top: 2rem;
+        }
+        .comparison-table {
+            border-radius: 10px;
+            overflow: hidden;
+            border: none;
+        }
+        .comparison-table th {
+            background-color: #007bff;
+            color: white;
+        }
+        .comparison-table td {
+            text-align: center;
+        }
+        .form-section {
+            background-color: #f0f8ff;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #0056b3;
+        }
+        .form-group input, .form-group select {
+            width: calc(100% - 20px);
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+            outline: none;
+        }
+        .info-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+        .sub-heading {
+            color: #007bff;
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        .sub-text {
+            color: #555;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>어린이보험 다이렉트, 현명한 엄마/아빠의 선택!</h1>
+        <p>2026년 최신 상품 비교로 우리 아이에게 최적의 보장을 설계하세요.</p>
+        <nav>
+            <ul>
+                <li><a href="#intro">어린이보험이란?</a></li>
+                <li><a href="#comparison">상품 비교 분석</a></li>
+                <li><a href="#price">가격대별 추천</a></li>
+                <li><a href="#faq">자주 묻는 질문</a></li>
+                <li><a href="#contact">전문가 상담</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <section id="intro">
+            <h2>어린이보험 다이렉트란 무엇인가요?</h2>
+            <p><strong>어린이보험 다이렉트</strong>는 보험 설계사 없이 온라인을 통해 직접 상품을 설계하고 가입하는 방식입니다. 이 방식은 중간 수수료가 절감되어 일반적으로 <span class="highlight">일반 가입 상품 대비 10~20% 저렴한 보험료</span>로 동일하거나 유사한 보장을 받을 수 있는 장점이 있습니다. 특히, 2026년 현재 많은 부모님들이 직접 상품을 비교하여 합리적인 소비를 지향하고 있습니다. 어린이보험은 단순히 질병이나 상해에 대한 보장뿐만 아니라, <span class="highlight">성장기 아이들의 특성상 발생하기 쉬운 다양한 위험(성장판 손상, 소아암, 아토피 등)에 대비</span>할 수 있도록 설계된 종합 보험입니다.</p>
+
+            <h3>어린이보험 다이렉트 가입이 필요한 이유</h3>
+            <p>아이들은 면역력이 약해 감염병에 취약하고, 활동량이 많아 상해 위험이 높습니다. 또한, 소아암이나 백혈병 같은 중대 질병은 치료 기간이 길고 고액의 비용이 발생합니다. 어린이보험은 이러한 <span class="highlight">예상치 못한 의료비 지출에 대한 경제적인 대비책</span>을 제공합니다. 특히 다이렉트 상품을 선택할 경우, 동일한 보장 내용이라도 더 저렴한 금액으로 가입할 수 있어 장기적인 관점에서 유리합니다. 가입 시점은 태아일 때 가입하는 <span class="highlight">태아보험</span>부터 시작하여 30세까지 가입이 가능한 <span class="highlight">어린이보험</span>까지 다양합니다. 아이의 연령, 건강 상태, 부모의 경제 상황 등을 고려하여 최적의 상품을 선택해야 합니다.</p>
+
+            <div class="keyword-tags" aria-label="어린이보험 관련 키워드">
+                <a href="#comparison">어린이보험 다이렉트 순위</a>
+                <a href="#price">어린이보험 가격</a>
+                <a href="#comparison">어린이보험 비갱신</a>
+                <a href="#comparison">어린이보험 무해지</a>
+                <a href="#faq">어린이보험 가입시기</a>
+                <a href="#comparison">어린이보험 장단점</a>
+                <a href="#comparison">태아보험</a>
+                <a href="#price">어린이보험 예상금액</a>
+                <a href="#comparison">30세만기 100세만기 차이</a>
+            </div>
+        </section>
+
+        <section id="comparison">
+            <h2>어린이보험 핵심 비교: 비갱신 VS 갱신형, 30세 만기 VS 100세 만기</h2>
+            <p>어린이보험 상품을 선택할 때 가장 중요한 기준은 <span class="highlight">갱신 여부와 만기 시점</span>입니다. 이 두 가지 요소를 어떻게 선택하느냐에 따라 총 납입 보험료와 보장 기간이 크게 달라지므로, 전문가의 도움을 받아 신중하게 결정해야 합니다.</p>
+
+            <h3>1. 비갱신형 vs 갱신형 비교 분석</h3>
+            <p>비갱신형은 가입 시점의 보험료가 만기 시점까지 변동 없이 유지되는 형태입니다. 초기 보험료는 갱신형보다 비싸지만, 총 납입 보험료는 더 저렴해지는 경우가 많습니다. 갱신형은 일정 기간(보통 1년, 3년, 5년)마다 보험료가 갱신되어 나이가 들거나 의료수가가 상승하면 보험료도 함께 인상됩니다. <span class="highlight">장기적인 관점에서 보면 비갱신형이 유리하며, 특히 다이렉트 상품으로 가입할 경우 비갱신형의 초기 보험료 부담을 줄일 수 있습니다.</span></p>
+
+            <div class="info-card">
+                <div class="sub-heading">비갱신형 어린이보험 장점</div>
+                <ul class="check-list">
+                    <li>보험료 변동 없이 일정하게 유지되어 장기적인 재정 계획 수립에 용이함.</li>
+                    <li>총 납입 보험료가 상대적으로 저렴해짐 (장기 유지 시).</li>
+                    <li>갱신 시점에 보험료 인상 걱정 불필요.</li>
+                </ul>
+                <div class="sub-heading" style="margin-top: 1.5rem;">갱신형 어린이보험 장점</div>
+                <ul class="check-list">
+                    <li>초기 보험료가 저렴하여 단기적인 부담이 적음.</li>
+                    <li>물가 상승률이나 의료 기술 발전에 따라 보장을 유연하게 변경 가능.</li>
+                </ul>
+            </div>
+
+            <h3>2. 30세 만기 vs 100세 만기 비교 분석</h3>
+            <p>어린이보험은 흔히 '어른이 보험'이라고도 불립니다. 이는 30세까지 가입이 가능하며, 30세 만기 또는 100세 만기로 설계할 수 있기 때문입니다. 30세 만기 상품은 성인이 되기 전까지 집중적으로 보장받고, 30세가 되었을 때 성인 보험으로 전환하는 방식입니다. 100세 만기 상품은 한 번의 가입으로 성인 시기까지 평생 보장받을 수 있습니다.</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>30세 만기 (집중 보장형)</th>
+                        <th>100세 만기 (평생 보장형)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>장점</strong></td>
+                        <td>보험료가 매우 저렴함. 30세에 맞춰 성인 보험으로 재설계 가능.</td>
+                        <td>한번 가입으로 평생 보장. 30세 이후 성인 전환 시 심사 불필요.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>단점</strong></td>
+                        <td>30세 이후 성인 보험 가입 시 별도 심사 필요.</td>
+                        <td>보험료가 상대적으로 높음.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>추천 대상</strong></td>
+                        <td>보험료 부담을 줄이고 싶거나 30세 이후 재설계 계획이 있는 부모.</td>
+                        <td>가입이 어려워지기 전에 평생 보장을 확정하고 싶은 부모.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>많은 전문가들은 <span class="highlight">30세 만기로 가입 후 성인이 되었을 때 전환하는 것을 추천</span>하기도 합니다. 이는 미래의 의료 환경과 보험 상품의 변화에 유연하게 대처할 수 있기 때문입니다. 하지만 100세 만기는 성인이 되어서도 질병력이 생길 경우를 대비하여 미리 보장을 확보해 두는 안정적인 전략입니다. 어떤 선택이 더 좋은지는 가계의 재정 상태와 아이의 건강 상태를 고려하여 결정해야 합니다.</p>
+            <p><strong>어린이보험 순위</strong>는 만기 설정에 따라 달라지기도 합니다. 30세 만기에서는 가성비가 좋은 상품이, 100세 만기에서는 보장 범위가 넓은 상품이 상위권을 차지하는 경향이 있습니다. 다이렉트 비교 사이트에서 <span class="highlight">어린이보험 추천</span> 상품들을 면밀히 검토하는 것이 중요합니다.</p>
+        </section>
+
+        <section id="price">
+            <h2>어린이보험 다이렉트 가격대별 추천 및 예상 비용</h2>
+            <p>어린이보험 가격은 가입하는 시기(태아, 신생아, 10세 등), 보장 내용(진단비, 입원일당, 특약 구성), 갱신 여부, 만기 시점 등 여러 요인에 의해 크게 달라집니다. 특히 다이렉트 가입은 설계사 수수료가 없어 <span class="highlight">일반 가입보다 평균 10~20% 저렴한 가격</span>에 가입이 가능하며, 이는 장기적으로 큰 절약 효과를 가져옵니다.</p>
+
+            <h3>어린이보험 예상 금액대별 설계 가이드 (2026년 기준)</h3>
+            <p>다음은 연령대별, 설계 방향별 대략적인 <strong>어린이보험 예상 금액</strong>(월 납입액)입니다. 이는 참고용이며, 정확한 견적은 개인별 맞춤 설계를 통해 확인해야 합니다. <span class="highlight">어린이보험 저렴한곳</span>을 찾을 때 단순히 금액만 보지 말고, 보장 내용과 가입 조건을 함께 확인해야 합니다.</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>연령대</th>
+                        <th>설계 유형</th>
+                        <th>월 예상 보험료 (다이렉트 기준)</th>
+                        <th>주요 보장 내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>태아/신생아</strong></td>
+                        <td>30세 만기 비갱신형</td>
+                        <td>3만원 ~ 5만원대</td>
+                        <td>선천성 질환, 출생 시 위험 보장, 3대 진단비(암, 뇌혈관, 심장질환)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1~5세</strong></td>
+                        <td>100세 만기 비갱신형</td>
+                        <td>6만원 ~ 8만원대</td>
+                        <td>3대 진단비, 성장기 질환(아토피, 폐렴 등), 입원/수술비 보장</td>
+                    </tr>
+                    <tr>
+                        <td><strong>6~10세</strong></td>
+                        <td>30세 만기 무해지형</td>
+                        <td>4만원 ~ 6만원대</td>
+                        <td>골절/상해, 스쿨존 교통사고, 입원일당, 일상생활 배상책임</td>
+                    </tr>
+                    <tr>
+                        <td><strong>11세~30세</strong></td>
+                        <td>성인 전환 대비형</td>
+                        <td>5만원 ~ 7만원대</td>
+                        <td>청소년기 주요 질환, 3대 진단비 고액 보장, 성인 전환 대비 특약</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>어린이보험 평균 금액</strong>을 알아보실 때 반드시 고려해야 할 것이 있습니다. 바로 <span class="highlight">특약의 구성</span>입니다. 불필요한 특약을 제외하고 핵심 보장(3대 진단비, 입원일당, 수술비)에 집중한다면 <span class="highlight">어린이보험 싼곳</span>을 찾을 수 있습니다. 또한, <span class="highlight">무해지환급형 상품</span>을 선택할 경우 일반형 상품 대비 20~30% 저렴하게 가입이 가능하여 보험료를 절약할 수 있습니다.</p>
+
+            <div class="info-card">
+                <div class="sub-heading">무해지환급형이란?</div>
+                <div class="sub-text">무해지환급형은 보험료 납입 기간 중 해지할 경우 해지 환급금이 없는 대신, 일반 상품보다 보험료가 저렴한 상품입니다. 납입 완료 후에는 일반 상품과 동일한 환급금을 받을 수 있어, 중도 해지 계획이 없는 분들에게 유리한 선택지입니다.</div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <h2>자주 묻는 질문 (FAQ)</h2>
+            <p><strong>네이버 지식iN</strong>에서 <strong>'어린이보험 다이렉트'</strong>를 검색하신 많은 분들이 궁금해하시는 질문들을 정리했습니다.</p>
+            <dl>
+                <dt tabindex="0" aria-expanded="false">Q1. 어린이보험 가입 시기는 언제인가요? 태아보험과 차이점은 무엇인가요?</dt>
+                <dd>A1. 태아보험은 어린이보험에 태아 특약을 추가하여 임신 중 가입하는 형태입니다. 임신 22주 이전에 가입해야 선천성 질환이나 저체중아 출산 등에 대비할 수 있습니다. 22주가 지난 후에는 가입에 제한이 생길 수 있으므로, 임신이 확인되는 대로 빠르게 상담받는 것이 좋습니다. 태아보험은 출생 직후부터 보장이 시작되어 어린이보험으로 자동 전환됩니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q2. 어린이보험 가입 순위는 어떻게 되나요?</dt>
+                <dd>A2. 어린이보험 순위는 매년, 매월 판매 실적이나 고객 만족도 등에 따라 변동됩니다. 하지만 중요한 것은 <span class="highlight">순위 자체보다 우리 아이에게 필요한 보장 항목을 우선적으로 고려</span>하는 것입니다. 특히 3대 진단비(암, 뇌혈관, 심장질환)의 보장 금액과 범위를 중점적으로 비교해야 합니다. 다이렉트 비교 사이트에서 제공하는 객관적인 비교 정보를 활용하여 <span class="highlight">어린이보험 추천</span> 상품을 확인하는 것이 현명합니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q3. 무해지환급형이 정말 좋은가요? 장단점을 알려주세요.</dt>
+                <dd>A3. <span class="highlight">무해지 어린이보험의 가장 큰 장점은 보험료가 저렴하다는 것입니다.</span> 일반형 상품 대비 20~30% 저렴하게 가입이 가능하며, 이는 특히 <span class="highlight">비갱신형 상품</span>과 결합될 경우 장기적으로 큰 절약 효과를 가져옵니다. 단점은 보험료 납입 기간 중 해지 시 환급금이 전혀 없다는 점입니다. 따라서 중도 해지할 가능성이 적고, 만기까지 유지할 계획이라면 무해지환급형이 매우 유리한 선택입니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q4. 어린이보험 보상 청구 절차는 복잡한가요?</dt>
+                <dd>A4. 과거에는 복잡한 서류 절차가 필요했지만, 최근에는 <span class="highlight">모바일 앱을 통해 간편하게 보상 청구</span>가 가능합니다. 진료비 영수증, 진단서 등을 사진으로 찍어 업로드하면 처리가 가능합니다. 다이렉트 보험사도 보상 시스템을 간편하게 구축하고 있어 큰 어려움 없이 이용할 수 있습니다. <span class="highlight">어린이보험 후기</span>들을 살펴보면 보상 청구의 간편성도 중요한 선택 기준이 되고 있습니다.</dd>
+                <dt tabindex="0" aria-expanded="false">Q5. 2026년 어린이보험 가입 시 주의사항은 무엇인가요?</dt>
+                <dd>A5. 2026년에는 <span class="highlight">표준화된 보장 내용 외에 새로운 질병에 대한 특약</span>이 지속적으로 추가되고 있습니다. 특히 환경성 질환이나 정신 건강 관련 보장 특약도 강화되는 추세입니다. 가입 전 반드시 약관을 꼼꼼히 확인하여, 우리 아이에게 필요한 보장을 정확하게 파악하고 불필요한 특약은 제외해야 합니다. <span class="highlight">어린이보험 저렴한곳</span>을 찾더라도 보장 범위가 좁지 않은지 확인하는 것이 중요합니다.</dd>
+            </dl>
+        </section>
+
+        <section class="form-section" id="contact">
+            <h2>무료 맞춤 견적 및 상담 요청</h2>
+            <p><strong>어린이보험 다이렉트</strong>는 상품 선택의 폭이 넓어 혼자서 비교하기 어려울 수 있습니다. 우리 아이의 연령, 건강 상태에 맞는 최적의 보장 설계와 <span class="highlight">어린이보험 가격비교</span>를 전문가에게 맡겨보세요. 가장 저렴한 가격으로 최고의 보장을 받는 방법을 알려드립니다.</p>
+
+            <form action="#" method="POST" onsubmit="alert('상담 신청이 완료되었습니다.'); return false;">
+                <div class="form-group">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" name="name" placeholder="고객님의 성함을 입력해주세요." required>
+                </div>
+                <div class="form-group">
+                    <label for="childAge">아이 연령 (만 나이)</label>
+                    <input type="number" id="childAge" name="childAge" placeholder="만 0세 ~ 30세" min="0" max="30" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">연락처</label>
+                    <input type="tel" id="phone" name="phone" placeholder="010-xxxx-xxxx" required>
+                </div>
+                <div class="form-group">
+                    <label for="insuranceType">관심 있는 보험 종류</label>
+                    <select id="insuranceType" name="insuranceType">
+                        <option value="all">전체 비교</option>
+                        <option value="nonrenewal">비갱신형 (추천)</option>
+                        <option value="renewal">갱신형</option>
+                        <option value="30y">30세 만기</option>
+                        <option value="100y">100세 만기</option>
+                        <option value="taea">태아보험</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">문의 사항 (선택 사항)</label>
+                    <textarea id="message" name="message" rows="4" placeholder="궁금한 점이나 특별히 원하는 보장 내용을 작성해주세요."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="terms">개인정보 수집 및 이용 동의</label>
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <small>개인정보 수집 및 이용에 동의합니다.</small>
+                </div>
+                <button type="submit" class="cta-button">무료 견적/상담 신청하기</button>
+            </form>
+        </section>
+
+        <section class="external-links">
+            <h2>어린이보험 관련 공신력 있는 정보 출처</h2>
+            <p>신뢰할 수 있는 외부 자료를 통해 더 많은 정보를 얻고, 현명한 보험 가입을 계획해 보세요. <span class="highlight">어린이보험 장단점</span>을 객관적으로 파악하는 데 도움이 됩니다.</p>
+            <ul>
+                <li><a href="https://www.fss.or.kr/fss/main/index.do" target="_blank">금융감독원 (FSS)</a> - 보험 가입 시 유의사항 및 소비자 보호 관련 정보 제공</li>
+                <li><a href="https://www.kca.go.kr/main.do" target="_blank">한국소비자원 (KCA)</a> - 보험 상품 관련 소비자 피해 사례 및 분쟁 해결 정보 제공</li>
+                <li><a href="https://www.kidi.or.kr/" target="_blank">보험연구원</a> - 국내외 보험 시장 동향 및 연구 자료 제공</li>
+                <li><a href="https://namu.wiki/w/%EC%96%B4%EB%A6%B0%EC%9D%B4%EB%B3%B4%ED%97%98" target="_blank">나무위키 - 어린이보험</a> - 어린이보험의 일반적인 개념 및 역사, 보장 내용 상세 설명</li>
+                <li><a href="https://www.ins.or.kr/" target="_blank">생명보험협회/손해보험협회</a> - 보험 상품 비교 공시 및 보험 관련 기본 정보 제공</li>
+            </ul>
+        </section>
+
+        <section id="additional-content">
+            <h2>어린이보험 다이렉트 가입, 내 아이를 위한 현명한 선택</h2>
+            <h3>보장 금액 설정: '고액 보장' vs '합리적 보장'</h3>
+            <p><strong>어린이보험</strong>을 설계할 때 3대 진단비(암, 뇌혈관질환, 허혈성심장질환)의 보장 금액을 얼마로 설정할지가 가장 큰 고민입니다. 고액 보장을 선택하면 마음은 든든하지만, <span class="highlight">어린이보험 금액</span> 부담이 커집니다. 반면, 합리적인 수준으로 설정하면 보험료 부담은 줄어들지만, 만약의 사태에 대비가 부족할까 걱정됩니다.</p>
+            <p>전문가들은 <span class="highlight">실손보험(실비)</span>을 기본으로 깔고, 어린이보험에서는 고액의 진단비를 집중적으로 보장하도록 설계하는 것을 권장합니다. 실비는 실제로 지출한 의료비를 돌려받는 반면, 진단비는 진단만 받아도 보험금이 지급되므로 치료비뿐 아니라 부모님의 간병비나 생활비로도 활용할 수 있습니다. <span class="highlight">어린이보험 추천</span> 상품을 보면 진단비 보장을 넉넉하게 가져가는 경우가 많습니다.</p>
+
+            <h3>어린이보험 특약 선택 가이드: 꼭 필요한 것 vs 불필요한 것</h3>
+            <p>다이렉트 상품으로 가입할 때 가장 어려운 부분은 수많은 특약 중에서 어떤 것을 선택해야 할지 결정하는 것입니다. 불필요한 특약은 보험료만 높일 뿐입니다. <span class="highlight">어린이보험 장점</span>을 극대화하기 위해 다음 특약들을 중점적으로 고려해야 합니다.</p>
+            <ul class="check-list">
+                <li><strong>3대 진단비 (암, 뇌혈관질환, 허혈성심장질환):</strong> 아이들이 성인이 되어서도 발병률이 높은 질환으로, 보장 범위를 넓게 설정해야 합니다.</li>
+                <li><strong>성장기 질환 특약:</strong> 소아암, 백혈병, 당뇨병 등 성장기 아동에게 치명적인 질환에 대비합니다.</li>
+                <li><strong>상해 특약:</strong> 골절, 화상 등 아이들이 흔히 겪는 상해 사고에 대한 보장입니다.</li>
+                <li><strong>일상생활 배상책임:</strong> 아이가 타인에게 피해를 입혔을 때 보상해 주는 특약으로, 보험료가 저렴한 반면 보장 범위가 넓어 인기가 많습니다.</li>
+            </ul>
+            <p>반면, 소소한 질병에 대한 입원일당이나 통원 특약 등은 실비 보험으로 대체 가능하거나 보험료 대비 효율이 낮은 경우가 많으므로 신중하게 선택해야 합니다. <span class="highlight">어린이보험 비교</span> 시 이 부분을 꼼꼼히 체크하면 <span class="highlight">어린이보험 저렴한곳</span>을 찾을 수 있습니다.</p>
+
+            <h3>2026년 보험 시장 동향과 다이렉트 가입의 장점</h3>
+            <p>2026년에는 보험 시장의 디지털 전환이 가속화되면서 다이렉트 채널의 경쟁력이 더욱 강화되고 있습니다. AI 기반의 맞춤형 설계 서비스가 등장하여, 과거 설계사를 통해서만 가능했던 정교한 설계도 다이렉트로 가능해졌습니다. 이는 <span class="highlight">어린이보험 다이렉트 순위</span> 상승의 주요 원인이기도 합니다.</p>
+            <p>특히 <span class="highlight">내돈내산</span> 후기를 살펴보면, 많은 소비자들이 직접 비교를 통해 합리적인 가격으로 <span class="highlight">어린이보험 가입</span>에 성공한 사례가 많습니다. 다이렉트 채널은 여러 보험사의 상품을 한눈에 비교할 수 있어 <span class="highlight">어린이보험 비교사이트</span>의 역할을 효과적으로 수행하며, <span class="highlight">어린이보험 가장싼곳</span>을 찾고자 하는 부모님들에게 최적의 환경을 제공합니다.</p>
+            <p>궁극적으로 <strong>어린이보험</strong>은 아이의 미래를 위한 투자입니다. 단순히 <span class="highlight">어린이보험 금액</span>만 비교할 것이 아니라, 보장 기간(30세 vs 100세), 보장 내용, 보험사의 안정성 등을 종합적으로 고려하여 신중하게 선택해야 합니다. 다이렉트 채널을 통해 <span class="highlight">어린이보험 가입 순서</span>에 따라 체계적으로 준비한다면 합리적인 선택이 가능합니다.</p>
+
+        </section>
+
     </main>
-  </body>
-</html>
+
+    <footer>
+        <p>&copy; 2026 어린이보험 다이렉트 비교센터. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // FAQ 아코디언 기능 (접기/펼치기)
+        document.querySelectorAll('dl dt').forEach((dt) => {
+            dt.addEventListener('click', () => {
+                const isActive = dt.classList.contains('active');
+                document.querySelectorAll('dl dt').forEach(item => {
+                    item.classList.remove('active');
+                    item.nextElementSibling.style.display = 'none';
+                    item.setAttribute('aria-expanded', 'false');
+                });
+                if (!isActive) {
+                    dt.classList.add('active');
+                    dt.nextElementSibling.style.display = 'block';
+                    dt.setAttribute('aria-expanded', 'true');
+                }
+            });
+            dt.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dt.click();
+                }
+            });
+        });
+    </script>
+
+  
